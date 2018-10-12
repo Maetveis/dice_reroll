@@ -63,7 +63,6 @@ int main(int argv, char** args)
 	ss >> b;
 	ss >> c;
 
-	std::cout << args[0] << " " << args[1] << " " << args[2] << " " << args[3] << std::endl;
 	std::cout << rerollProbAll(a, b, c);
 
 	return 0;
