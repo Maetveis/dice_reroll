@@ -72,8 +72,8 @@ double rerollProbAll(unsigned faces, unsigned count, unsigned rerolls)
 		copy(a, b, count + 1);
 	}
 
-	print(a, count+1);
-	std::cout << std::endl;
+	//print(a, count+1);
+	//std::cout << std::endl;
 	return a[0];
 }
 
