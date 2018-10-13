@@ -12,6 +12,7 @@ void clear(double* b, unsigned size)
 		b[i] = 0;
 	}
 }
+
 void copy(double* a, double* b, unsigned size)
 {
 	for(unsigned i = 0; i < size; ++i)
