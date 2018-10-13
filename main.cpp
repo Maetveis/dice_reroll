@@ -21,6 +21,29 @@ void copy(double* a, double* b, unsigned size)
 	}
 }
 
+void print(double* b, unsigned size)
+{
+	for(unsigned i = 0; i < size; ++i)
+	{
+		std::cout << b[i] << " ";
+	}
+}
+
+//Ha valaki megtalalja az angol kifejezést erre írjon vagy küldjün pull requestet
+double nAllatK(unsigned n, unsigned k)
+{
+	double prod = 1;
+	for(unsigned i = k + 1; i <= n; ++i)
+	{
+		prod *= i;
+	}
+	for(unsigned i=2; i <= n-k; ++i)
+	{
+		prod /= i;
+	}
+	return prod;
+}
+
 double rerollProbAll(unsigned faces, unsigned count, unsigned rerolls)
 {
 	double a[count + 1];
@@ -29,7 +52,7 @@ double rerollProbAll(unsigned faces, unsigned count, unsigned rerolls)
 	//Initialize the probabilities
 	for(unsigned hit = 0; hit <= count; ++hit)
 	{
-		a[count - hit] = 1.0 / pow(faces, hit) * pow((faces - 1.0) / faces, count - hit);
+		a[count - hit] = nAllatK(count, hit) / pow(faces, hit) * pow((faces - 1.0) / faces, count - hit);
 	}
 
 	//Use the previous level to calculate the next
@@ -43,12 +66,14 @@ double rerollProbAll(unsigned faces, unsigned count, unsigned rerolls)
 		{
 			for(unsigned hit = 0; hit <= i; ++hit)
 			{
-				b[i - hit] += a[i] / pow(faces, hit) * pow((faces - 1.0) / faces, i - hit);
+				b[i - hit] += nAllatK(i, hit) * a[i] / pow(faces, hit) * pow((faces - 1.0) / faces, i - hit);
 			}
 		}
 		copy(a, b, count + 1);
 	}
 
+	print(a, count+1);
+	std::cout << std::endl;
 	return a[0];
 }
 
